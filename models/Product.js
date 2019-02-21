@@ -7,22 +7,11 @@ var Types = keystone.Field.Types;
  */
 var Product = new keystone.List('Product');
 
-User.add({
+Product.add({
 	name: { type: Types.Text, required: true, index: true , initial:true },
-	price: { type: Types.Email, initial: true, required: true, unique: true, index: true },
-	password: { type: Types.Password, initial: true, required: true },
-}, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
+    price: { type: Types.Number, initial: true, required: true},
+    description: { type: String }
 });
 
-// Provide access to Keystone
-User.schema.virtual('canAccessKeystone').get(function () {
-	return this.isAdmin;
-});
-
-
-/**
- * Registration
- */
-User.defaultColumns = 'name, email, isAdmin';
-User.register();
+Product.defaultColumns = 'name, email, isAdmin';
+Product.register();
