@@ -1,16 +1,13 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
-/**
- * Order Model
- * ==========
- */
-var Product = new keystone.List('Order');
+var Order = new keystone.List('Order');
 
 Order.add({
-	customer:{type : Types.Relationship , ref'User' , many : false , required : true , initial : true},
-	products : {type : Types.Relationship,ref:'Products'}
+	customer: { type: Types.Relationship, ref: 'User', many: false, index: true,initial:true },
+	products: { type: Types.Relationship, ref: 'Product', many: true, index: true , required: true,initial:true},
 });
 
-Order.defaultColumns = 'name, email, isAdmin';
+Order.defaultSort = '-createdAt';
+Order.defaultColumns = 'customer, products';
 Order.register();
